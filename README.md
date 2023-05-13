@@ -3,6 +3,15 @@ This is a project to create a Snake Game.
 The step-by-step guide from the Udemy 100 Days of Code - The Complete Python Pro Bootcamp, with Angela Yu as the instructor.
 ![snake_game_step_guide](pictures/snake_game_step_guide.png)
 
+# Table of Contents
+<!-- TOC -->
+* [Task 1: Create Snake Body](#task-1--create-snake-body)
+* [Task 2: Move the Snake](#task-2--move-the-snake)
+  * [How to move as a whole?](#how-to-move-as-a-whole)
+  * [How to turn the snake?](#how-to-turn-the-snake)
+* [Task 3: Control the snake](#task-3--control-the-snake)
+<!-- TOC -->
+
 # Task 1: Create Snake Body
 ![task1_create_snake_body](pictures/task1_create_snake_body.png)
 
@@ -130,7 +139,7 @@ We need to add this line to make the first one move
 Now we can use the first segment `segments[0]` to control the direction of the snake move.
 
 
-## Task 3: Control the snake
+# Task 3: Control the snake
 Before we go further, we created a Snake Class and moved the existing code to OOP.
 ![task2_create_snake_class](pictures/task3_create_snake_class.png)
 

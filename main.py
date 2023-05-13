@@ -24,7 +24,7 @@ while game_is_on:
     screen.update()
     # slow down a bit so we can see what happened after all 3 segments move once
     # this can be used to control speed of the snake
-    time.sleep(0.5)
+    time.sleep(0.1)
 
     snake.move()
 
