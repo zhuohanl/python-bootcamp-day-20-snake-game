@@ -5,11 +5,11 @@ The step-by-step guide from the Udemy 100 Days of Code - The Complete Python Pro
 
 # Table of Contents
 <!-- TOC -->
-* [Task 1: Create Snake Body](#task-1--create-snake-body)
-* [Task 2: Move the Snake](#task-2--move-the-snake)
+* [Task 1: Create Snake Body](#task-1-create-snake-body)
+* [Task 2: Move the Snake](#task-2-move-the-snake)
   * [How to move as a whole?](#how-to-move-as-a-whole)
   * [How to turn the snake?](#how-to-turn-the-snake)
-* [Task 3: Control the snake](#task-3--control-the-snake)
+* [Task 3: Control the snake](#task-3-control-the-snake)
 <!-- TOC -->
 
 # Task 1: Create Snake Body
