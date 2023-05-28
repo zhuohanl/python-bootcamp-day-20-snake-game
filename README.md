@@ -1,6 +1,9 @@
 This is a project to create a Snake Game.
 
-The step-by-step guide from the Udemy 100 Days of Code - The Complete Python Pro Bootcamp, with Angela Yu as the instructor.
+This is how the game looks like:
+![snake_game_step_guide](gifs/snake_game_final.gif)
+
+Below we have the step-by-step guide from the Udemy 100 Days of Code - The Complete Python Pro Bootcamp, with Angela Yu as the instructor.
 ![snake_game_step_guide](pictures/snake_game_step_guide.png)
 
 # Table of Contents
@@ -197,3 +200,165 @@ Thus we added a conditional check below:
 ```
 Here we can use UP, DOWN, LEFT and RIGHT keys to control how the snake moves.
 ![task3.1](gifs/snake_game_task_3.1_key_control.gif)
+
+
+# Task 4: Detect collision with food
+
+Create a `Food` class:
+```commandline
+from turtle import Turtle
+import random
+
+
+class Food(Turtle):
+
+    def __init__(self):
+        super().__init__()
+        self.shape("circle")
+        self.penup()
+        self.shapesize(0.5, 0.5)
+        self.color("blue")
+        # So we don't need to look at the animation of the food being created
+        self.speed("fastest")
+
+        self.refresh()
+
+    def refresh(self):
+        random_x = random.randint(-13, 13) * 20
+        random_y = random.randint(-13, 13) * 20
+        self.goto(random_x, random_y)
+```
+
+When collision happens, the food goes to another random place:
+```commandline
+game_is_on = True
+while game_is_on:
+    ...
+
+    # Detect collision with food
+    if snake.head.distance(food) < 15:
+        print("Collision!")
+        food.refresh()
+```
+
+# Task 5: Create a scoreboard
+
+Create a `Scoreboard` class:
+```commandline
+from turtle import Turtle
+
+SCORE_BOARD_POSITION = (0, 270)
+ALIGNMENT = "center"
+FONT = ('Courier', 24, 'normal')
+
+
+class Scoreboard(Turtle):
+
+    def __init__(self):
+        super().__init__()
+
+        self.score = 0
+
+        self.color("white")
+        self.hideturtle()
+        self.penup()
+        self.goto(SCORE_BOARD_POSITION)
+
+        self.update_scoreboard()
+
+    def update_scoreboard(self):
+        self.write(arg=f"Score: {self.score}", align=ALIGNMENT, font=FONT)
+
+    def increase_score(self):
+        self.score += 1
+
+        self.clear()
+        self.update_scoreboard()
+```
+
+When detecting collision with food, increase score:
+```commandline
+game_is_on = True
+while game_is_on:
+    ...
+
+    # Detect collision with food
+    if snake.head.distance(food) < 15:
+        ...
+        scoreboard.increase_score()
+```
+
+# Task 6: Detect collision with wall
+
+In `Scoreboard` class, write a new function `game_over()` to pop up the "Game Over" message when the condition is triggered:
+```commandline
+    def game_over(self):
+        self.goto(CENTRE)
+        self.write(arg="Game Over.", align=ALIGNMENT, font=FONT)
+```
+
+When detecting the snake hit the wall, trigger the `game_over()` function:
+```commandline
+game_is_on = True
+while game_is_on:
+    ...
+    # Detect collision with wall
+    if abs(snake.head.xcor()) > 280 or abs(snake.head.ycor()) > 280:
+        game_is_on = False
+
+if not game_is_on:
+    scoreboard.game_over()
+```
+
+# Task 7: Detect collision with tail
+
+# Task 7.1: Extend the Snake after eating a food
+
+In `Snake` class, add a new function `extend()`:
+```commandline
+    def add_segment(self, position):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+
+        new_segment.penup()
+        new_segment.goto(position)
+
+        self.segments.append(new_segment)
+
+    def extend(self):
+        # Add this segment to the same position as the last segment
+        self.add_segment(self.segments[-1].position())
+```
+
+After collision with food, call the `extend()` function:
+```commandline
+game_is_on = True
+while game_is_on:
+    ...
+
+    # Detect collision with food
+    if snake.head.distance(food) < 15:
+        ...
+        snake.extend()
+        ...
+```
+
+# Task 7.2: Detect collision with tail
+
+If detecting colliding with tail, call `game_over()`:
+
+```commandline
+game_is_on = True
+while game_is_on:
+    ...
+    # Detect collision with tail
+    # If head collides with any segment other than the head itself
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
+            game_is_on = False
+
+if not game_is_on:
+    scoreboard.game_over()
+```
+
+Congrats! This completes the game building.
